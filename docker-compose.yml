@@ -4,6 +4,7 @@ services:
     build: ./infra/php
     volumes:
       - ./backend:/work
+      # composer create-project laravel/laravel=8.0 sample
 
   web:
     image: nginx:latest
