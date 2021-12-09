@@ -5,6 +5,8 @@ services:
     volumes:
       - ./backend:/work
       # composer create-project laravel/laravel=8.0 sample
+      # composer require nuwave/lighthouse
+      # php artisan vendor:publish --tag=lighthouse-schema
 
   web:
     image: nginx:latest
