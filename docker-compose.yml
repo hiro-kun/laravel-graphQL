@@ -8,9 +8,9 @@ services:
       # composer require nuwave/lighthouse
       # php artisan vendor:publish --tag=lighthouse-schema
       # composer require mll-lab/laravel-graphql-playground
-　　　 # mysqlへの接続
+      # mysqlへの接続
       # mysql -h 172.18.0.2 -P 3306 -u phper -p
-
+  
   web:
     image: nginx:latest
     ports:
@@ -19,7 +19,7 @@ services:
       - ./backend:/work
       - ./infra/nginx/default.conf:/etc/nginx/conf.d/default.conf
     working_dir: /work
-
+  
   db:
     build: ./infra/mysql
     volumes:
