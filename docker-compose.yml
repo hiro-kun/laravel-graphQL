@@ -9,7 +9,8 @@ services:
       # php artisan vendor:publish --tag=lighthouse-schema
       # composer require mll-lab/laravel-graphql-playground
       # mysqlへの接続
-      # mysql -h 172.18.0.2 -P 3306 -u phper -p
+      # mysql -h 172.18.0.2 -P 3306 -u hiro -p
+      # laravel起動
       # cd /work/sample
       # php artisan serve --port 80
   
@@ -28,5 +29,6 @@ services:
     volumes:
       - db-store:/var/lib/mysql
 
+# 複数コンテナから参照可能
 volumes:
   db-store:
