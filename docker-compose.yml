@@ -1,19 +1,22 @@
-version: "2.4"
+# 不要イメージ全削除
+# docker rmi `docker images -q`
+version: "3.2"
 services:
   app:
     build: ./infra/php
     volumes:
       - ./backend:/work
+      # docker exec -it laravel-graphql-app-1 bash
       # composer create-project laravel/laravel=8.0 sample
       # composer require nuwave/lighthouse
       # php artisan vendor:publish --tag=lighthouse-schema
       # composer require mll-lab/laravel-graphql-playground
       # mysqlへの接続
-      # mysql -h 172.18.0.2 -P 3306 -u hiro -p
+      # docker inspect laravel-graphql-db-1
+      # mysql -h ipadress -P 3306 -u root -p
       # laravel起動
       # cd /work/sample
       # php artisan serve --port 80
-  
   web:
     image: nginx:latest
     ports:
@@ -25,9 +28,24 @@ services:
     working_dir: /work
   
   db:
+    # docker inspect でIP確認
     build: ./infra/mysql
+    ports:
+      - target: 3306
+        published: ${DB_PUBLISHED_PORT:-3306}
+        protocol: tcp
+        mode: host
     volumes:
-      - db-store:/var/lib/mysql
+      - type: volume
+        source: db-store
+        target: /var/lib/mysql
+        volume:
+          nocopy: true
+    environment:
+      - MYSQL_DATABASE=${DB_DATABASE:-laravel}
+      - MYSQL_USER=${DB_USERNAME:-phper}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-secret}
+      - MYSQL_PASSWORD=${DB_PASSWORD:-secret}
 
 # 複数コンテナから参照可能
 volumes:
