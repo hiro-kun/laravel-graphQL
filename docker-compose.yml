@@ -50,4 +50,3 @@ services:
 # 複数コンテナから参照可能
 volumes:
   db-store:
-  
