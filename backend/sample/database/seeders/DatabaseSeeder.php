@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
+use Illuminate\Support\Facades\DB; 
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -13,6 +15,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // User::factory(10)->create();
+        DB::table('users')->insert([
+            'name'           => 'taro-yamada',
+            'deparetment_id' => '1',
+            'paymente_id'    => '1',
+            'created'        => date('Y-m-d H:i:s'),
+        ]);
     }
 }
